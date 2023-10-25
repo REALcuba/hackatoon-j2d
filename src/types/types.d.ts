@@ -1,0 +1,1 @@
+export type method = 'get' | 'post' | 'put' | 'delete';
