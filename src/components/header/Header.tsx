@@ -1,8 +1,9 @@
-
+import logo from "../../assets/rick&morty_logo.png"
 const Header = () => {
   return (
-    <header>
-      <nav className="flex  bg-slate-600">
+    <header className="">
+      <nav className="flex justify-between items-center bg-slate-600">
+        <img className="w-20 h-20 ps-2" src={logo} alt="" />
         <ul>
           <li>esto</li>
           <li>tiene</li>

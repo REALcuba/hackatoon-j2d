@@ -1,54 +1,78 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { AxiosInstance, AxiosResponse } from "axios";
 import { method } from '../types/types'
-// Importar tipos relacionados a Axios según tus necesidades
+
+interface PageInfo {
+    prev: string | null;
+    next: string | null;
+}
+
 const useAxios = (
     configObj: {
         axiosInstance: AxiosInstance;
         method: method;
         url: string;
     }
-): [string, boolean, AxiosResponse | null] => {
+): [string, boolean, AxiosResponse | null, PageInfo, () => void, () => void, number] => {
     const { axiosInstance, method, url } = configObj;
     const [res, setRes] = useState<AxiosResponse | null>(null);
     const [error, setError] = useState<string>('');
     const [loading, setLoading] = useState<boolean>(true);
+    const [page, setPage] = useState(1)
+    const [pageInfo, setPageInfo] = useState<PageInfo>({
+        prev: null,
+        next: null,
+    });
+
+    const fetchData = useCallback(async (requestUrl: string) => {
+        const controller = new AbortController();
+        try {
+            const response = await axiosInstance[method](
+                requestUrl,
+                {
+                    signal: controller.signal,
+                }
+            );
+            setRes(response);
+            setPageInfo({
+                prev: response.data.info.prev,
+                next: response.data.info.next,
+            });
+            setLoading(false);
+        } catch (err) {
+            setError(err.message);
+            console.error(err);
+            setLoading(false);
+        } finally {
+            setLoading(false);
+        }
+        return () => {
+            controller.abort();
+        };
+    }, [axiosInstance, method]);
 
     useEffect(() => {
-        const controller = new AbortController();
+        fetchData(url);
+    }, [fetchData, url]);
 
-        const fetchData = async () => {
-            try {
-                const response = await axiosInstance[method](
-                    url,
-                    {
-                        signal: controller.signal,
-                    }
-                );
-                setRes(response);
-                // console.log(res);
+    const getNextPage = useCallback(() => {
+        if (pageInfo.next === null) {
+            return;
+        }
+        if (pageInfo.next) {
+            fetchData(pageInfo.next);
+            setPage(page + 1)
+        }
+    }, [fetchData, page, pageInfo.next]);
 
-                setLoading(false);
-            } catch (err) {
-                setError(err.message);
-                console.error(err);
-                setLoading(false);
-            } finally {
-                setLoading(false);
-            }
-        };
+    const getPrevPage = useCallback(() => {
+        if (pageInfo.prev) {
+            fetchData(pageInfo.prev);
+        }
+        setPage(page - 1)
+    }, [fetchData, page, pageInfo.prev]);
 
-        fetchData();
-
-        // useEffect cleanup function
-        // return () => {
-        //     controller.abort();
-        // };
-
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, []);
-
-    return [error, loading, res];
+    return [error, loading, res, pageInfo, getNextPage, getPrevPage, page];
 };
 
 export default useAxios;

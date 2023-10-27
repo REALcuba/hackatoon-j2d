@@ -2,7 +2,8 @@
 // import { useState } from 'react'
 // import './App.css'
 
-import GetEpisodesList from "./components/getEpisodesList/getEpisodesList"
+import Thumnail from "./thumnail/Thumnail"
+// import GetEpisodesList from "./components/getEpisodesList/GetEpisodesList"
 
 
 function App() {
@@ -14,7 +15,8 @@ function App() {
 
   return (
     <>
-      <GetEpisodesList />
+      {/* <GetEpisodesList /> */}
+      <Thumnail />
     </>
   )
 }
