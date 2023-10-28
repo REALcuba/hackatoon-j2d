@@ -1,11 +1,24 @@
 import logo from "../../assets/rick&morty_logo.png"
 import logo_name from '../../assets/logo_name.png'
-const Header = () => {
+import SearchBar from "../searchBar/SearchBar"
+// import { Dispatch, SetStateAction } from "react"
+type HeaderProps = {
+  // setSearchQuery: React.Dispatch<React.SetStateAction<string>>
+  // handleSearch: () => void
+}
+const Header: React.FC<HeaderProps> = () => {
+  // const navigate = useNavigate()
+  const handleLogoClick = () => {
+    console.log('clicked')
+    window.location.reload()
+
+  }
   return (
-    <header className="">
-      <nav className="flex justify-between items-center bg-slate-600">
-        <img className="w-20 h-20 ps-2" src={logo} alt="" />
-        <img src={logo_name}  className=" h-20 me-2"alt="" />
+    <header className="sticky top-0">
+      <nav className="flex justify-around items-center bg-slate-600">
+        <img className="w-20 h-20 ps-2" src={logo} alt="Rick and Morty logo" onClick={handleLogoClick} />
+        <img src={logo_name} className="hidden md:flex h-20 me-2" alt="Rick and Morty name logo" onClick={handleLogoClick} />
+        <SearchBar  />
       </nav>
     </header>
   )

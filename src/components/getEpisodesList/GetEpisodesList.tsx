@@ -1,25 +1,29 @@
 import useAxios from '../../hooks/useAxios'
 import { axiosClient } from '../../api/axiosclient'
 import { Episode } from 'rickmortyapi'
-// import { SetStateAction, useState } from 'react'
-// import { useState } from 'react';
+import ListFilter from '../listFilter/ListFilter'
+import { useState } from 'react'
 type GetEpisodesProps = {
     handleEpisodeClick: (episode: Episode) => void;
     // episode: any
 }
 const GetEpisodesList: React.FC<GetEpisodesProps> = ({ handleEpisodeClick }) => {
-
-    const [error, loading, res, pageInfo, getNextPage, getPrevPage, page] = useAxios({
+    const [url, setUrl] = useState('/episode')
+    const handleFilterChange = (url: string) => {
+        setUrl(url)
+    }
+    const [error, loading, res, pageInfo, getNextPage, getPrevPage, page, setPage] = useAxios({
 
         axiosInstance: axiosClient,
         method: 'get',
-        url: '/episode',
+        url: url,
     })
-
-
+    const listText = url !== 'character' ? 'List of Episodes' : 'List of Characters'
+    const moreBtn = url !== 'character' ? 'Get More Episodes' : ' Get More Characters'
     return (
-        <aside className='w-1/2 bg-green-400 flex m-3 flex-col max-h-screen overflow-none rounded-md box-border sm:w-1/3'>
-            <h3 className='text-center font-bold'>List of Episodes</h3>
+        <aside className='w-1/2 flex m-3  flex-col max-h-screen border overflow-none rounded-md box-border md:min-w-1/3'>
+            <ListFilter setUrl={handleFilterChange} setPage={setPage} />
+            <h3 className='text-center font-bold'>{listText}</h3>
             {loading && <p>loading...</p>}
             {!loading && error && <p className='errorMsg'>{error}</p>}
             {!loading && !error &&
@@ -27,7 +31,7 @@ const GetEpisodesList: React.FC<GetEpisodesProps> = ({ handleEpisodeClick }) => 
                 ><ul className='divide-y m-1 p-2 space-y-1'>
                         {res?.data.results.map((episode: Episode) =>
 
-                            <li key={episode.id} className='' onClick={() => handleEpisodeClick(episode)}>
+                            <li key={episode.id} className='hover:bg-gray-500 cursor-pointer' onClick={() => handleEpisodeClick(episode)}>
                                 {episode.name}
                             </li>
                         )} </ul>
@@ -40,7 +44,8 @@ const GetEpisodesList: React.FC<GetEpisodesProps> = ({ handleEpisodeClick }) => 
                         className='bg-blue-500 rounded-sm py-1 px-2 box-border hover:bg-green-700 hover:border'
                         onClick={getNextPage}
                     >
-                        Get More Episodes
+                        {moreBtn}
+                        {/* {url === 'episode' ? 'Get More Episodes' : ' Get More Characters'} */}
                     </button>
                 ) : (
                     <div className='space-x-2'>
@@ -51,9 +56,7 @@ const GetEpisodesList: React.FC<GetEpisodesProps> = ({ handleEpisodeClick }) => 
                     </div>
                 )}
             </div>
-            {/* <div className="w-1/2 bg-gray-200 p-3">
-                {selectedEpisode && <EpisodeDetails episode={selectedEpisode} />}
-            </div> */}
+
         </aside>
     )
 }

@@ -1,22 +1,8 @@
-import { useRouteError } from "react-router-dom";
+import { useRouteError } from "react-router-dom"
 
-export default function ErrorPage() {
-    const error = useRouteError();
-
-    if (typeof error === 'string') {
-        // Handle string type
-        const errorMessage: string = error;
-        console.log(errorMessage);
-    } else if (error instanceof Error) {
-        // Handle Error type
-        const errorObject: Error = error;
-        console.log(errorObject);
-    } else {
-        // Handle unknown type
-        console.log("Unknown error type");
-    }
-
-    const errorText = typeof error === 'string' ? error : (error instanceof Error ? error.message : "Unknown Error");
+const ErrorPage = () => {
+    const error = useRouteError()
+    const errorText = error ? (error instanceof Error ? error.message : String(error)) : "Unknown Error"
 
     return (
         <div id="error-page">
@@ -26,5 +12,7 @@ export default function ErrorPage() {
                 <i>{errorText}</i>
             </p>
         </div>
-    );
+    )
 }
+
+export default ErrorPage

@@ -1,22 +1,45 @@
-// import { create } from 'zustand'
-// import { devtools, persist } from 'zustand/middleware'
-// // import type { } from '@redux-devtools/extension' // required for devtools typing
+import { create } from 'zustand'
+import { devtools, persist } from 'zustand/middleware'
+import { axiosClient } from '../api/axiosclient'
+import { Character } from 'rickmortyapi'
+// import type { } from '@redux-devtools/extension' // required for devtools typing
 
-// interface BearState {
-//     bears: number
-//     increase: (by: number) => void
-// }
+interface StoreState {
+    results: Character[];
+    searchQuery: string;
+    setSearchQuery: (query: string) => void;
+    search: () => void;
+}
 
-// export const useBearStore = create<BearState>()(
-//     devtools(
-//         persist(
-//             (set) => ({
-//                 bears: 0,
-//                 increase: (by) => set((state) => ({ bears: state.bears + by })),
-//             }),
-//             {
-//                 name: 'bear-storage',
-//             }
-//         )
-//     )
-// )
+export const useStore = create<StoreState>()(
+    devtools(
+        persist(
+            (set) => ({
+                results: [],
+                searchQuery: '', // Agrega una propiedad para la consulta de búsqueda
+                setSearchQuery: (query) => set({ searchQuery: query }), // Función para actualizar la consulta de búsqueda
+                search: async () => {
+                    try {
+                        const state = useStore.getState()
+                        const response = await axiosClient.get(
+                            `https://rickandmortyapi.com/api/character/?name=${state.searchQuery}`
+                        )
+
+                        // Actualiza los resultados en el store
+                        useStore.setState(() => ({
+                            results: response.data.results,
+
+
+                        }))
+                        // console.log(state)
+                    } catch (error) {
+                        console.error('Error en la búsqueda de personajes:', error)
+                    }
+                },
+            }),
+            {
+                name: 'angel-storage',
+            }
+        )
+    )
+)
