@@ -24,7 +24,6 @@ const App: React.FC<AppProps> = () => {
   }
   const [selectedDetailsType, setSelectedDetailsType] = useState<Episode | Character | Location | null>(null)
   const [selectedDetails, setSelectedDetails] = useState<DetailsObject | null>(initialDetails)
-  console.log(url)
   const handleEpisodeClick = (detailsType: Episode | Character | Location) => {
     if (detailsType && typeof detailsType === 'object') {
       setSelectedDetailsType(detailsType)
@@ -54,7 +53,6 @@ const App: React.FC<AppProps> = () => {
   }, [selectedDetails, selectedDetailsType])
   // console.log(selectedDetailsType)
 
-  console.log(selectedDetails)
 
   // setCharacterData(searchResults)
   return (
