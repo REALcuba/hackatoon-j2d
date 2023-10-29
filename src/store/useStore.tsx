@@ -9,9 +9,11 @@ interface StoreState {
     results: Character[];
     searchQuery: string;
     locationArray: Location[];
+    selectedCharacter: Character | null;
     setSearchQuery: (query: string) => void;
     search: () => void;
     setUrl: (newUrl: string) => void;
+    setSelectedCharacter: (character: Character) => void;
 }
 
 export const useStore = create<StoreState>()(
@@ -21,10 +23,13 @@ export const useStore = create<StoreState>()(
         results: [],
         searchQuery: '',
         locationArray: [], // Agrega una propiedad para la consulta de búsqueda
+        selectedCharacter: null,
         setSearchQuery: (query) => set({ searchQuery: query.toLowerCase() }), // Función para actualizar la consulta de búsqueda
         // setLocation: (locations: Location[]) => set({ locationArray: locations }),
         // console.log(searchQuery);
-
+        setSelectedCharacter: (character: Character | null) => {
+            set({ selectedCharacter: character })
+        },
 
         setUrl: (newUrl) => set({ url: newUrl }),
         search: async () => {

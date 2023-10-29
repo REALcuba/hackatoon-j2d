@@ -13,8 +13,8 @@ const Header: React.FC<HeaderProps> = () => {
 
   }
   return (
-    <header className="sticky top-0">
-      <nav className="flex justify-around items-center bg-slate-600">
+    <header className="sticky top-0 ">
+      <nav className="flex justify-around items-center bg-slate-600 max-h10">
         <img className="w-20 h-20 ps-2" src={logo} alt="Rick and Morty logo" onClick={handleLogoClick} />
         <img src={logo_name} className="hidden md:flex h-20 me-2" alt="Rick and Morty name logo" onClick={handleLogoClick} />
         <SearchBar  />

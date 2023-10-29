@@ -1,9 +1,15 @@
-import { useEffect } from 'react'
+import { useEffect, useRef } from 'react'
 import { useStore } from '../../store/useStore'  // Asegúrate de importar correctamente el store
+import { Character } from 'rickmortyapi'
+import { Link } from 'react-router-dom'
 
 function GetSearchResult() {
-    const { searchQuery, search, results } = useStore()
-    
+    const { setSelectedCharacter, searchQuery, search, results } = useStore()
+    const elementRef = useRef<HTMLAnchorElement | null>(null)
+    const handleCharacterClick = (character: Character) => {
+        console.log(character)
+
+    }
     useEffect(() => {
         // Llama a la función de búsqueda cuando searchQuery cambie
         search()
@@ -11,11 +17,18 @@ function GetSearchResult() {
     console.log(searchQuery)
     console.log(results)
     return (
-        <div className='h-16 overflow-auto w-16'>
-           
-            <ul >
+        <div className='overflow-auto max-w-32'>
+            <ul className='overflow-auto h-32 '>
                 {results.map((character) => (
-                    <li key={character.id}>{character.name}</li>
+                    <li key={character.id} className='hover:bg-gray-400 cursor-pointer'
+                        onClick={(e) => {
+                            e.stopPropagation()
+                            setSelectedCharacter(character)
+                            handleCharacterClick(character)
+                        }}>
+                        <Link to={`/character/${character.id}`} ref={elementRef}>
+                            {character.name}
+                        </Link></li>
                 ))}
             </ul>
         </div>
