@@ -5,6 +5,7 @@ import { Character, Episode, Location } from 'rickmortyapi'
 import EpisodeDetails from './components/episodeDetails/EpisodeDetails'
 import GetAllCharacters from './components/getAllCharacters/GetAllCharacters'
 import { useStore } from './store/useStore'
+// import GetSearchResult from './components/getSearchResults/GEtSearchResult'
 
 type AppProps = {
   // searchResults: Character[]
@@ -25,6 +26,7 @@ const App: React.FC<AppProps> = () => {
   const [selectedDetailsType, setSelectedDetailsType] = useState<Episode | Character | Location | null>(null)
   const [selectedDetails, setSelectedDetails] = useState<DetailsObject | null>(initialDetails)
   const handleEpisodeClick = (detailsType: Episode | Character | Location) => {
+
     if (detailsType && typeof detailsType === 'object') {
       setSelectedDetailsType(detailsType)
       // console.log(url)
@@ -53,18 +55,17 @@ const App: React.FC<AppProps> = () => {
   }, [selectedDetails, selectedDetailsType])
   // console.log(selectedDetailsType)
 
+  const getEpisodesList = selectedDetailsType === null ? <GetAllCharacters /> : <EpisodeDetails selectedDetails={selectedDetails} />
 
-  // setCharacterData(searchResults)
   return (
     <>
-      <GetEpisodesList handleEpisodeClick={handleEpisodeClick} />
-      {selectedDetailsType !== null ? (
-        <EpisodeDetails selectedDetails={selectedDetails} />
-      ) : 
-        <GetAllCharacters />
 
-      }
-    </>
+      <GetEpisodesList handleEpisodeClick={handleEpisodeClick} />
+
+      {getEpisodesList}
+
+
+    </> 
   )
 }
 // to do

@@ -10,44 +10,49 @@ interface StoreState {
     searchQuery: string;
     locationArray: Location[];
     setSearchQuery: (query: string) => void;
-    // setLocation: (location: []) => Location[];
     search: () => void;
     setUrl: (newUrl: string) => void;
 }
 
 export const useStore = create<StoreState>()(
-    // devtools(
-    //     persist(
+
             (set) => ({
         url: 'episode',
-                results: [],
+        results: [],
         searchQuery: '',
         locationArray: [], // Agrega una propiedad para la consulta de búsqueda
-                setSearchQuery: (query) => set({ searchQuery: query }), // Función para actualizar la consulta de búsqueda
+        setSearchQuery: (query) => set({ searchQuery: query.toLowerCase() }), // Función para actualizar la consulta de búsqueda
         // setLocation: (locations: Location[]) => set({ locationArray: locations }),
+        // console.log(searchQuery);
+
+
         setUrl: (newUrl) => set({ url: newUrl }),
-                search: async () => {
+        search: async () => {
                     try {
                         const state = useStore.getState()
+                        if (state.searchQuery === '') {
+                            useStore.setState((prevState) => ({
+                                ...prevState,
+                                results: [],
+                            }))
+                        } else {
                         const response = await axiosClient.get(
                             `https://rickandmortyapi.com/api/character/?name=${state.searchQuery}`
                         )
-
+                            console.log('API response:', response.data.results)
                         // Actualiza los resultados en el store
-                        useStore.setState(() => ({
-                            results: response.data.results,
+                            const updatedResults = response.data.results
 
-
-                        }))
-                        // console.log(state)
+                            useStore.setState((prevState) => ({
+                                ...prevState,
+                                results: updatedResults,
+                            }))
+                        }
+                        console.log(state)
                     } catch (error) {
                         console.error('Error en la búsqueda de personajes:', error)
                     }
                 },
             }),
-    //         {
-    //             name: 'angel-storage',
-    //         }
-    //     )
-    // )
+
 )

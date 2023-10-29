@@ -7,7 +7,6 @@ type HeaderProps = {
   // handleSearch: () => void
 }
 const Header: React.FC<HeaderProps> = () => {
-  // const navigate = useNavigate()
   const handleLogoClick = () => {
     console.log('clicked')
     window.location.reload()
