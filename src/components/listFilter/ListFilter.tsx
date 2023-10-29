@@ -5,6 +5,8 @@ type ListFilterProps = {
 }
 
 const ListFilter: React.FC<ListFilterProps> = ({ setUrl, setPage }) => {
+
+
     const handleFilterChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
         e.preventDefault()
         setUrl(e.target.value.toLowerCase())
@@ -16,11 +18,12 @@ const ListFilter: React.FC<ListFilterProps> = ({ setUrl, setPage }) => {
         <form>
             <label htmlFor="selecty" className="p-1">Filter By:</label>
             <select id="selecty"
-                className="flex-shrink p-1 items-center w-2/3 justify-center gap-2 mt-1 rounded "
+                className="flex-shrink p-1 items-center w-2/3 justify-center gap-2 mt-1 border rounded "
                 onChange={handleFilterChange}
             >
                 <option className=" rounded-sm p-1 px-2 box-border hover:bg-green-700 hover:border">Episode</option>
                 <option className=" rounded-sm p-1 px-2 box-border hover:bg-green-700 hover:border">Character</option>
+                <option className=" rounded-sm p-1 px-2 box-border hover:bg-green-700 hover:border">Location</option>
             </select>
         </form>
 

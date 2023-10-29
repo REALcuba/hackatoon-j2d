@@ -1,5 +1,6 @@
 import { Outlet } from "react-router-dom"
 import Header from "../components/header/Header"
+import Footer from "../components/footer/Footer"
 // import { useEffect } from "react"
 // import { axiosClient } from "../api/axiosclient"
 // import GetEpisodesList from "../components/getEpisodesList/GetEpisodesList"
@@ -52,6 +53,7 @@ export const RootLayout: React.FC<RootLayoutProps> = () => {
                     {/* </Routes> */} 
             </main>
             </div>
+            <Footer />
         </div>
     )
 }

@@ -1,6 +1,7 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import App from './App.tsx'
+// import LocationPage from './pages/locationPage/LocationPage.tsx'
 // import { BrowserRouter } from 'react-router-dom'
 
 import {
@@ -26,6 +27,10 @@ const router = createBrowserRouter([
         path: "/",
         element: <App />,
       },
+      // {
+      //   path: "/location",
+      //   element: <LocationPage />,
+      // },
 
       {
         path: "*",
@@ -37,9 +42,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    {/* <BrowserRouter> */}
+
     <RouterProvider router={router} />
-    {/* <App /> */}
-    {/* </BrowserRouter> */}
+
   </React.StrictMode>,
 )

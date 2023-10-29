@@ -40,7 +40,7 @@ const PaintCharactersDetails = ({ charactersUrl }: { charactersUrl: string[] }) 
             {!loading && characterData && characterData?.length > 0 && (
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-h-screen gap-2 items-center box-border p-2 pt-3 mb-3'>
                     {characterData?.map((character: { id: number, name: string, image: string, species: string, origin: { name: string } }) => (
-                        <Card key={character.id} className='hover:bg-slate-300' sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: 180, minHeight: 225, maxHeight: 225 }}>
+                        <Card key={character.id} className='hover:bg-slate-300' sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: 200,Width: 180, minHeight: 240, maxHeight: 235 }}>
                             <CardMedia
                                 sx={{ margin: 1, maxHeight: 200, scale: 1, maxWidth: 120, borderRadius: '5%' }}
                                 className='flex items-center'
@@ -48,13 +48,17 @@ const PaintCharactersDetails = ({ charactersUrl }: { charactersUrl: string[] }) 
                                 image={character.image}
                                 alt={character.name}
                             />
-                            <CardContent sx={{ padding: 1 }}>
-                                <Typography gutterBottom component="div" sx={{ marginBottom: 0, padding: 0 }}>
+                            <CardContent sx={{ padding: 1 }} className='flex flex-col items-center'>
+                                <Typography gutterBottom component="div" >
                                     {character.name}
                                 </Typography>
-                                <div className='flex gap-1'>
-                                    <Typography variant="body2" color="text.secondary">
-                                        {character.species} / {character.origin.name}
+                                <div className='flex  items-center divide-x divide-black'>
+                                    <Typography variant="body2" color="text.secondary" sx={{ paddingRight: 1 }} >
+                                        {character.species}
+                                    </Typography>
+                                    {/* <span className='flex items-center'>|</span> */}
+                                    <Typography variant="body2" color="text.secondary" sx={{ paddingLeft: 1 }}>
+                                        {character.origin.name}
                                     </Typography>
                                 </div>
                             </CardContent>

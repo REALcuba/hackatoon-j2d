@@ -1,44 +1,76 @@
 
-import { useState } from 'react'
-// import './App.css'
-
+import { useEffect, useState } from 'react'
 import GetEpisodesList from "./components/getEpisodesList/GetEpisodesList"
-import { Character, Episode } from 'rickmortyapi'
+import { Character, Episode, Location } from 'rickmortyapi'
 import EpisodeDetails from './components/episodeDetails/EpisodeDetails'
 import GetAllCharacters from './components/getAllCharacters/GetAllCharacters'
-// import Thumnail from './components/Thumnail/Thumnail'
+import { useStore } from './store/useStore'
 
 type AppProps = {
   // searchResults: Character[]
 }
+type DetailsType = "Episode" | "Location" | "Character";
+
+type DetailsObject = {
+  type: DetailsType;
+  details: Episode | Location | Character | null;
+};
+
 const App: React.FC<AppProps> = () => {
-
-  const [selectedEpisode, setSelectedEpisode] = useState<Episode | null>(null)
-  // const [characterData, setCharacterData] = useState<Character[]>()
-  const [result] = useState<Character[]>([])
-  // const [loading, setLoading] = useState(true)
-  const handleEpisodeClick = (episode: Episode) => {
-    if (episode) {
-      setSelectedEpisode(episode)
-    }
-
+  const { url } = useStore()
+  const initialDetails: DetailsObject = {
+    type: "Episode", // Cambia el tipo según tus necesidades
+    details: null, // Utiliza el valor de selectedDetailsType
   }
+  const [selectedDetailsType, setSelectedDetailsType] = useState<Episode | Character | Location | null>(null)
+  const [selectedDetails, setSelectedDetails] = useState<DetailsObject | null>(initialDetails)
+  console.log(url)
+  const handleEpisodeClick = (detailsType: Episode | Character | Location) => {
+    if (detailsType && typeof detailsType === 'object') {
+      setSelectedDetailsType(detailsType)
+      // console.log(url)
+
+      let newType: DetailsType = "Episode" // Valor predeterminado
+
+      if (url === "character") {
+        newType = "Character"
+      } else if (url === "location") {
+        newType = "Location"
+      } else {
+        newType = "Episode"
+      }
+
+      const newDetails: DetailsObject = {
+        type: newType, // Cambia el tipo según tus necesidades
+        details: detailsType
+      }
+
+      setSelectedDetails(newDetails)
+    }
+  }
+
+  useEffect(() => {
+
+  }, [selectedDetails, selectedDetailsType])
+  // console.log(selectedDetailsType)
+
+  console.log(selectedDetails)
+
   // setCharacterData(searchResults)
   return (
     <>
-
       <GetEpisodesList handleEpisodeClick={handleEpisodeClick} />
-      {selectedEpisode !== null ? (
-
-        <EpisodeDetails episode={selectedEpisode} />
-        ) : (
+      {selectedDetailsType !== null ? (
+        <EpisodeDetails selectedDetails={selectedDetails} />
+      ) : 
         <GetAllCharacters />
-      )}  
-      {/* <Thumnail characterData={result} />    */}
+
+      }
     </>
   )
 }
-
+// to do
+{/* <Thumnail characterData={result} />    */ }
 export default App
 
 

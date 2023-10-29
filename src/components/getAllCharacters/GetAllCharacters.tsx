@@ -1,6 +1,7 @@
 import useAxios from '../../hooks/useAxios'
 import { axiosClient } from '../../api/axiosclient'
 // import * as React from 'react';
+import { useNavigate } from 'react-router-dom'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
@@ -12,6 +13,8 @@ const GetAllCharacters = () => {
         method: 'get',
         url: '/character',
     })
+
+    const navigate = useNavigate() 
     const handleLocationClick = (e: React.MouseEvent<HTMLSpanElement>) => {
         const selectedCharacter = e.currentTarget.getAttribute('data-character')
 
@@ -20,6 +23,7 @@ const GetAllCharacters = () => {
             // console.log('Species:', species)
             console.log('Origin Name:', originName)
         }
+        navigate('/location')
     }
     const handleSpeciesClick = (e: React.MouseEvent<HTMLSpanElement>) => {
         const selectedCharacter = e.currentTarget.getAttribute('data-character')
@@ -27,6 +31,7 @@ const GetAllCharacters = () => {
         if (selectedCharacter) {
             const { species } = JSON.parse(selectedCharacter)
             console.log('Species:', species)
+
             // console.log('Origin Name:', originName)
         }
     }
@@ -59,8 +64,9 @@ const GetAllCharacters = () => {
                                         >
                                             {character.name}
                                         </Typography>
-                                        <div className='flex gap-1'>
+                                        <div className='flex  items-center divide-x divide-black'>
                                             <Typography variant="body2" color="text.secondary"
+                                                sx={{ paddingRight: 1 }}
                                                 onClick={handleSpeciesClick}
                                                 data-character={JSON.stringify({
                                                     species: character.species,
@@ -68,10 +74,11 @@ const GetAllCharacters = () => {
                                                 })}>
                                                 {character.species}
                                             </Typography>
-                                            <span className='flex items-center'>|</span>
-                                            <Typography component="span" variant="body2" onClick={handleLocationClick}
+                                            {/* <span className='flex items-center'>|</span> */}
+                                            <Typography component="span" variant="body2"
+                                                sx={{ paddingLeft: 1 }}
+                                                onClick={handleLocationClick}
                                                 data-character={JSON.stringify({
-                                                    // species: character.species,
                                                     originName: character.origin.name
 
                                                 })} color="text.secondary">

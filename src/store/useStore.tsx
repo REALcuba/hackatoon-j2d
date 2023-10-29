@@ -1,23 +1,31 @@
 import { create } from 'zustand'
-import { devtools, persist } from 'zustand/middleware'
+// import { devtools, persist } from 'zustand/middleware'
 import { axiosClient } from '../api/axiosclient'
-import { Character } from 'rickmortyapi'
+import { Character, Location } from 'rickmortyapi'
 // import type { } from '@redux-devtools/extension' // required for devtools typing
 
 interface StoreState {
+    url: string;
     results: Character[];
     searchQuery: string;
+    locationArray: Location[];
     setSearchQuery: (query: string) => void;
+    // setLocation: (location: []) => Location[];
     search: () => void;
+    setUrl: (newUrl: string) => void;
 }
 
 export const useStore = create<StoreState>()(
-    devtools(
-        persist(
+    // devtools(
+    //     persist(
             (set) => ({
+        url: 'episode',
                 results: [],
-                searchQuery: '', // Agrega una propiedad para la consulta de búsqueda
+        searchQuery: '',
+        locationArray: [], // Agrega una propiedad para la consulta de búsqueda
                 setSearchQuery: (query) => set({ searchQuery: query }), // Función para actualizar la consulta de búsqueda
+        // setLocation: (locations: Location[]) => set({ locationArray: locations }),
+        setUrl: (newUrl) => set({ url: newUrl }),
                 search: async () => {
                     try {
                         const state = useStore.getState()
@@ -37,9 +45,9 @@ export const useStore = create<StoreState>()(
                     }
                 },
             }),
-            {
-                name: 'angel-storage',
-            }
-        )
-    )
+    //         {
+    //             name: 'angel-storage',
+    //         }
+    //     )
+    // )
 )
