@@ -10,10 +10,12 @@ interface StoreState {
     searchQuery: string;
     locationArray: Location[];
     selectedCharacter: Character | null;
+    darkMode: boolean;
     setSearchQuery: (query: string) => void;
     search: () => void;
     setUrl: (newUrl: string) => void;
     setSelectedCharacter: (character: Character) => void;
+    toggleDarkMode: () => void;
 }
 
 export const useStore = create<StoreState>()(
@@ -24,6 +26,8 @@ export const useStore = create<StoreState>()(
         searchQuery: '',
         locationArray: [], // Agrega una propiedad para la consulta de búsqueda
         selectedCharacter: null,
+        darkMode: false,
+        toggleDarkMode: () => set((state) => ({ ...state, darkMode: !state.darkMode })),
         setSearchQuery: (query) => set({ searchQuery: query.toLowerCase() }), // Función para actualizar la consulta de búsqueda
         // setLocation: (locations: Location[]) => set({ locationArray: locations }),
         // console.log(searchQuery);

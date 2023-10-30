@@ -1,11 +1,14 @@
 import useAxios from '../../hooks/useAxios'
 import { axiosClient } from '../../api/axiosclient'
 // import * as React from 'react';
-import { useNavigate } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
 import CardMedia from '@mui/material/CardMedia'
 import Typography from '@mui/material/Typography'
+import { useRef } from 'react'
+import { useStore } from '../../store/useStore'
+import { Character } from 'rickmortyapi'
 // import { CardActionArea } from '@mui/material';
 const GetAllCharacters = () => {
     const [error, loading, res] = useAxios({
@@ -13,7 +16,8 @@ const GetAllCharacters = () => {
         method: 'get',
         url: '/character',
     })
-
+    const elementRef = useRef<HTMLAnchorElement | null>(null)
+    const { setSelectedCharacter } = useStore()
     const navigate = useNavigate() 
     const handleLocationClick = (e: React.MouseEvent<HTMLSpanElement>) => {
         const selectedCharacter = e.currentTarget.getAttribute('data-character')
@@ -47,18 +51,26 @@ const GetAllCharacters = () => {
                         <div className='grid grid-cols-1 border md:grid-cols-2 lg:grid-cols-3  gap-2 justify-items-center  pt-3 mb-3'
                         >
 
-                            {res?.data.results.map((character: { id: number, name: string, image: string, species: string, origin: { name: string } }) =>
+                        {res?.data.results.map((character: Character) =>
 
-                                <Card key={character.id} className=' hover:scale-125' sx={{ border: 1, flexWrap: 'wrap', alignItems: 'center', maxWidth: 215, minHeight: 250, maxHeight: 225, margin: 1, display: 'flex', justifyContent: 'center' }} >
+                            <Card key={character.id}
+                                className=' hover:scale-125'
+                                onClick={(e) => {
+                                    e.stopPropagation()
+                                    setSelectedCharacter(character)
+                                    // handleCharacterClick(character)
+                                }}
+                                sx={{ border: 1, flexWrap: 'wrap', alignItems: 'center', maxWidth: 215, minHeight: 250, maxHeight: 225, margin: 1, display: 'flex', justifyContent: 'center' }} >
                                     {/* <li className=''>
                                        
                                     </li> */}
                                     {/* <CardActionArea> */}
-                                    <CardMedia sx={{ maxHeight: 150, maxWidth: '80%', margin: 1, borderRadius: '5%' }}
+                                <Link to={`/character/${character.id}`} ref={elementRef}>  <CardMedia sx={{ maxHeight: 150, maxWidth: '80%', margin: 1, borderRadius: '5%' }}
                                         component="img"
                                         image={character.image}
                                         alt={character.name}
-                                    />
+
+                                /></Link>
                                     <CardContent sx={{ padding: 1 }}>
                                         <Typography gutterBottom component="div" sx={{ marginBottom: 0, padding: 0 }}
                                         >

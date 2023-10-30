@@ -2,7 +2,7 @@
 import { useEffect, useState } from 'react'
 import GetEpisodesList from "./components/getEpisodesList/GetEpisodesList"
 import { Character, Episode, Location } from 'rickmortyapi'
-import EpisodeDetails from './components/episodeDetails/EpisodeDetails'
+import EpisodeDetails from './components/elementsDetails/ElementsDetails'
 import GetAllCharacters from './components/getAllCharacters/GetAllCharacters'
 import { useStore } from './store/useStore'
 // import GetSearchResult from './components/getSearchResults/GEtSearchResult'
@@ -18,7 +18,7 @@ type DetailsObject = {
 };
 
 const App: React.FC<AppProps> = () => {
-  const { url } = useStore()
+  const { url} = useStore()
   const initialDetails: DetailsObject = {
     type: "Episode", // Cambia el tipo según tus necesidades
     details: null, // Utiliza el valor de selectedDetailsType
@@ -55,14 +55,14 @@ const App: React.FC<AppProps> = () => {
   }, [selectedDetails, selectedDetailsType])
   // console.log(selectedDetailsType)
 
-  const getEpisodesList = selectedDetailsType === null ? <GetAllCharacters /> : <EpisodeDetails selectedDetails={selectedDetails} />
+  const getEpisodesListDetails = selectedDetailsType === null ? <GetAllCharacters /> : <EpisodeDetails selectedDetails={selectedDetails} />
 
   return (
     <>
 
       <GetEpisodesList handleEpisodeClick={handleEpisodeClick} />
 
-      {getEpisodesList}
+      {getEpisodesListDetails}
 
 
     </> 

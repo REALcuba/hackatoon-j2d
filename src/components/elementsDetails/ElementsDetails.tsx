@@ -48,7 +48,7 @@ const renderLocationDetails = (location: Location) => (
 )
 
 const renderCharacterDetails = (character: Character) => (
-    <section className='border-2 m-3 p-2 w-full flex overflow-auto flex-col md:flex-row rounded-md box-border'>
+    <section className='border-2 m-3 p-2 w-full gap-10 flex overflow-auto flex-col md:flex-row rounded-md box-border'>
         <div className='flex md:flex-col w-1/3 p-1'>
             <h2 className='text-center font-bold'>Character Details</h2>
             <div className='border p-1 rounded'>
@@ -61,7 +61,7 @@ const renderCharacterDetails = (character: Character) => (
         <div>
             <h2 className='text-center font-bold'>Characters</h2>
             <picture>
-                <img src={character.image} alt="" />
+                <img  className='rounded-lg hover:shadow-lg' src={character.image} alt={character.name} />
             </picture>
             {/* {character.episodes} */}
         </div>

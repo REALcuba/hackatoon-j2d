@@ -11,7 +11,7 @@ const CharacterPage = () => {
     }
     return (
         <div className="mt-3 w-full">
-            <section className="border-2 m-3 p-2 w-full h-86 justify-evenly items-center align-center mt-3 flex flex-col md:flex-row ">
+            <section className="border-2 m-3 p-2  h-86 justify-evenly items-center align-center mt-3 flex flex-col md:flex-row ">
                 <div className="border-2 m-3 p-2 w-full h-86 justify-evenly items-center flex flex-col md:flex-row ">
                     <article className="rounded border space-x-3 h-64 md:h-96 md:w-1/3 ">
                 <p>Name: {selectedCharacter?.name}</p>
@@ -19,7 +19,7 @@ const CharacterPage = () => {
                 <p>Species: {selectedCharacter?.species}</p>
                 <p>Origin: {selectedCharacter?.origin?.name} </p>
                         <p>Status: {selectedCharacter?.status} </p>
-                        <p>Origin: {selectedCharacter?.type} </p>
+                        <p>Type: {selectedCharacter?.type ? selectedCharacter?.type : "Unknown"} </p>
             </article>
                     <picture className="w-2/3 flex justify-center rounded ">
                         <img className="rounded-lg hover:shadow-2xl" src={selectedCharacter?.image} alt={selectedCharacter?.name} />

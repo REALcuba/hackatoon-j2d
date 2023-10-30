@@ -24,7 +24,7 @@ const GetEpisodesList: React.FC<GetEpisodesProps> = ({ handleEpisodeClick }) => 
     const moreBtn = url !== 'character' ? 'Get More Episodes' : ' Get More Characters'
     const locationBtn = url === 'location' ? 'Get More Locations' : moreBtn
     return (
-        <aside className='w-1/2 flex m-3  flex-col max-h-screen border overflow-none rounded-md box-border md:min-w-1/3'>
+        <aside className='w-1/2 flex m-3 mt-3 flex-col max-h-screen border overflow-none rounded-md box-border md:min-w-1/3'>
             <ListFilter setUrl={handleFilterChange} setPage={setPage} />
             <h3 className='text-center font-bold'>{locationText}</h3>
             {loading && <p>loading...</p>}

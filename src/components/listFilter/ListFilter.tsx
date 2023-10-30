@@ -16,9 +16,9 @@ const ListFilter: React.FC<ListFilterProps> = ({ setUrl, setPage }) => {
 
     return (
         <form>
-            <label htmlFor="selecty" className="p-1">Filter By:</label>
+            <label htmlFor="selecty" className="p-1 ml-2">Filter By:</label>
             <select id="selecty"
-                className="flex-shrink p-1 items-center w-2/3 justify-center gap-2 mt-1 border rounded "
+                className=" p-1 items-center bg-slate-300 gap-2 mt-3 ml-2 border rounded "
                 onChange={handleFilterChange}
             >
                 <option className=" rounded-sm p-1 px-2 box-border hover:bg-green-700 hover:border">Episode</option>

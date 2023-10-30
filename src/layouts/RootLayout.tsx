@@ -1,6 +1,7 @@
 import { Outlet } from "react-router-dom"
 import Header from "../components/header/Header"
 import Footer from "../components/footer/Footer"
+import { useStore } from "../store/useStore"
 // import { useEffect } from "react"
 // import { axiosClient } from "../api/axiosclient"
 // import GetEpisodesList from "../components/getEpisodesList/GetEpisodesList"
@@ -39,8 +40,10 @@ export const RootLayout: React.FC<RootLayoutProps> = () => {
     //     }
     //     // eslint-disable-next-line
     // }, [searchQuery])
+    const { darkMode } = useStore()
+    const className = darkMode ? 'bg-slate-800 text-white' : 'bg-white '
     return (
-        <div className="root-layout max-h-full ">
+        <div className={className} >
             <Header  />
             <div className="flex justify-around">
 

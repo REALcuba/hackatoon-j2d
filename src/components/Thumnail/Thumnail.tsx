@@ -11,7 +11,7 @@ const Thumnail = ({ characterData }: { characterData: Character[] }) => {
           {characterData?.length > 0 && (
               <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-h-screen gap-2 items-center box-border pt-3 mb-3'>
                   {characterData.map((character: Character) => (
-                      <Card key={character.id} className='hover:scale-75' sx={{ justifyContent: 'center', maxWidth: 180, minHeight: 225, maxHeight: 225, margin: 'auto' }}>
+                      <Card key={character.id} className='' sx={{ justifyContent: 'center', maxWidth: 180, minHeight: 225, maxHeight: 225, margin: 'auto' }}>
                           <CardMedia
                       sx={{ margin: 1, maxHeight: 200, scale: 1, maxWidth: 140, borderRadius: '5%' }}
                       component="img"
