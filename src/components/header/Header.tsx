@@ -1,16 +1,16 @@
 import logo from "../../assets/rick&morty_logo.png"
 import logo_name from '../../assets/logo_name.png'
 import SearchBar from "../searchBar/SearchBar"
+import { useNavigate } from "react-router-dom"
 // import { Dispatch, SetStateAction } from "react"
 type HeaderProps = {
   // setSearchQuery: React.Dispatch<React.SetStateAction<string>>
   // handleSearch: () => void
 }
 const Header: React.FC<HeaderProps> = () => {
+  const navigate = useNavigate()
   const handleLogoClick = () => {
-    console.log('clicked')
-    window.location.reload()
-
+    navigate('/')
   }
   return (
     <header className="sticky top-0 ">
