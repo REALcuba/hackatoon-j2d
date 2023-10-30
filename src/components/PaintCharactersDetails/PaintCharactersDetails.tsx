@@ -6,11 +6,16 @@ import { Character } from 'rickmortyapi'
 import { useState, useEffect } from 'react'
 // import useAxios from '../../hooks/useAxios'
 import { axiosClient } from '../../api/axiosclient'
+import { useNavigate } from 'react-router-dom'
 
 const PaintCharactersDetails = ({ charactersUrl }: { charactersUrl: string[] }) => {
     const [characterData, setCharacterData] = useState<Character[]>()
     const [loading, setLoading] = useState(true)
-
+    const navigate = useNavigate()
+    const handleClick = (e) => {
+        e.stopPropagation()
+        navigate('/')
+    }
     useEffect(() => {
         const fetchCharacterDetails = async () => {
             const promises = charactersUrl?.map(async (characterUrl) => {
@@ -37,7 +42,10 @@ const PaintCharactersDetails = ({ charactersUrl }: { charactersUrl: string[] }) 
             {!loading && characterData && characterData?.length > 0 && (
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-h-screen gap-2 items-center box-border p-2 pt-3 mb-3'>
                     {characterData?.map((character: { id: number, name: string, image: string, species: string, origin: { name: string } }) => (
-                        <Card key={character.id} className='hover:bg-slate-300' sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: 200,Width: 180, minHeight: 240, maxHeight: 235 }}>
+                        <Card key={character.id}
+                            className='hover:bg-slate-300'
+                            onClick={handleClick}
+                            sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: 200, Width: 180, minHeight: 240, maxHeight: 235 }}>
                             <CardMedia
                                 sx={{ margin: 1, maxHeight: 200, scale: 1, maxWidth: 120, borderRadius: '5%' }}
                                 className='flex items-center'
