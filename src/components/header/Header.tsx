@@ -17,15 +17,15 @@ const Header: React.FC<HeaderProps> = () => {
     navigate('/')
   }
   return (
-    <header className="sticky top-0 ">
-      <nav className="flex justify-around items-center bg-slate-600 max-h10">
+    <header className="sticky top-0 max-w-screen">
+      <nav className="flex justify-between items-center bg-slate-600 max-h-20">
         <img className="w-20 h-20 ps-2" src={logo} alt="Rick and Morty logo" onClick={handleLogoClick} />
         <img src={logo_name} className="hidden md:flex h-20 me-2" alt="Rick and Morty name logo" onClick={handleLogoClick} />
-        <div className="flex justify-between items-center gap-4">
+        <div className="flex  gap-3  max-h-10 ">
         <SearchBar  />
-        <button className=" mt-2 " onClick={toggleDarkMode} >
-          <img src={darkMode ? sun : sunOff} alt="" />
-        </button>
+          <svg width="40" height="40" className=" pt-2" onClick={toggleDarkMode} >
+            <image className="" href={darkMode ? sun : sunOff} />
+          </svg>
         </div>
       
       </nav>

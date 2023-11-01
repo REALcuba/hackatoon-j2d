@@ -41,14 +41,14 @@ export const RootLayout: React.FC<RootLayoutProps> = () => {
     //     // eslint-disable-next-line
     // }, [searchQuery])
     const { darkMode } = useStore()
-    const className = darkMode ? 'bg-slate-800 text-white' : 'bg-white '
+    const className = darkMode ? 'bg-slate-800 text-slate-100' : 'bg-white '
     return (
         <div className={className} >
             <Header  />
-            <div className="flex justify-around">
+            <div className="flex justify-around max-h-screen">
 
                 {/* <GetEpisodesList handleEpisodeClick={handleEpisodeClick} /> */}
-                <main className="  flex max-h-screen min-w-full">
+                <main className="  flex  min-w-full">
                     <Outlet />
                     {/* <Routes>
                         <Route path="/*" element={<App searchResults={results} />} />

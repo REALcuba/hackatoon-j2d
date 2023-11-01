@@ -14,8 +14,7 @@ function GetSearchResult() {
         // Llama a la función de búsqueda cuando searchQuery cambie
         search()
     }, [search, searchQuery])
-    console.log(searchQuery)
-    console.log(results)
+  
     return (
         <div className='overflow-auto max-w-32 dark:text-slate-800'>
             <ul className='overflow-auto h-32 '>

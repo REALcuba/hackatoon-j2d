@@ -1,11 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react'
 import adjustment_search from '../../assets/adjustments-search.svg'
+// import listSearch from "../../assets/list-search.svg"
+// 
 import { useStore } from '../../store/useStore'
 import GetSearchResult from '../getSearchResults/GetSearchResult'
 
 const SearchBar: React.FC = () => {
-    // const searchQuery = useStore((state) => state.searchQuery)
-    // const setSearchQuery = useStore((state) => state.setSearchQuery)
+    const [showSearch, setShowISearch] = useState(false)
+
     const [inputValue, setInputValue] = useState('')
     const { results, searchQuery, setSearchQuery } = useStore()
     const inputRef = useRef<HTMLInputElement | null>(null)
@@ -23,6 +25,14 @@ const SearchBar: React.FC = () => {
     // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //   setInputValue(event.target.value)
     // }
+    const handleSearchIconClick = (e: React.MouseEvent) => {
+        //open search input
+        e.stopPropagation()
+        console.log("search")
+
+        setShowISearch(!showSearch)
+
+    }
 
     const handleClickOutside = (e: React.MouseEvent) => {
         e.preventDefault()
@@ -45,31 +55,34 @@ const SearchBar: React.FC = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchQuery, setSearchQuery])
-    console.log(results)
     const resultClassName = searchQuery.length > 0 ? 'absolute z-10 my-2 p-2 bg-gray-200 h-32 rounded shadow-lg' : "hidden" 
     return (
-        <div className='a'>
-            <div className="flex items-center flex-col  rounded max-h-8">
-                <form className="flex rounded-l">
+        <label htmlFor="searchbox">
+            <div className='w-56'>
+                <div className="relative rounded">
                     <input
-                        ref={inputRef}
-                    type="search"
-                        className="rounded-l p-2"
-                    placeholder="Search a character"
-                    onChange={handleSearch}
                         value={inputValue}
-                        onClick={handleClickOutside}
-
+                        ref={inputRef}
+                        onChange={handleSearch}
+                    type="search"
+                        className={`md:w-56 bg-slate-600 md:bg-white transition-all ease-in-out duration-500  ${showSearch ? 'w-56 bg-white' : 'w-0 bg-slate-600 md:bg-white md:w-56 '} rounded p-2 pr-0 pl-2`}
+                        placeholder="Search a character"
                     />
-                    <img className="relative bg-white rounded-r" src={adjustment_search} alt="search filter" />
-            </form>
+                    <svg
+                        className={`w-6 h-6 mr-1 absolute rounded-r right-2 top-1/2 transform -translate-y-1/2 cursor-pointer '
+                        `}
+                        onClick={handleSearchIconClick}
+                    >
+                        <image href={adjustment_search} />
+                    </svg>
+                </div>
             </div>
             {results !== null && (
                 <div className={resultClassName}>
                 <GetSearchResult />
                 </div>
             )}
-        </div>
+        </label>
     )
 }
 
