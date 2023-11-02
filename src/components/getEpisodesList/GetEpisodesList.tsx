@@ -26,7 +26,7 @@ const GetEpisodesList: React.FC<GetEpisodesProps> = ({ handleEpisodeClick }) => 
     return (
         <aside className='w-1/2 flex m-3 mt-3 flex-col max-h-screen border overflow-none rounded-md box-border md:min-w-1/3'>
             <ListFilter setUrl={handleFilterChange} setPage={setPage} />
-            <h3 className='text-center font-bold'>{locationText}</h3>
+            <h3 className='text-center font-bold mt-1'>{locationText}</h3>
             {loading && <p>loading...</p>}
             {!loading && error && <p className='errorMsg'>{error}</p>}
             {!loading && !error &&
