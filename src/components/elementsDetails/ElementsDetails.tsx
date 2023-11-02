@@ -63,14 +63,12 @@ const renderCharacterDetails = (character: Character) => (
             <picture>
                 <img  className='rounded-lg hover:shadow-lg' src={character.image} alt={character.name} />
             </picture>
-            {/* {character.episodes} */}
         </div>
-        {/* Agrega más datos del episodio según tus necesidades */}
     </section>
 )
 
 const EpisodeDetails = (selectedDetails: selectedDetails) => {
-    //check episode type Episode
+    //check episode type and render details
 
     switch (selectedDetails?.selectedDetails?.type) {
         case "Episode":
