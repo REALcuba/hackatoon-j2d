@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback, Dispatch, SetStateAction } from "react"
-import { AxiosInstance, AxiosResponse } from "axios"
+import { AxiosError, AxiosInstance, AxiosResponse } from "axios"
 import { method } from '../types/types'
 
 interface PageInfo {
@@ -39,10 +39,15 @@ const useAxios = (
                 next: response.data.info.next,
             })
             setLoading(false)
-        } catch (err) {
-            setError(err.message)
-            console.error(err)
-            setLoading(false)
+        } catch (err: unknown | AxiosError) {
+            if (
+                err instanceof AxiosError &&
+                err.name === 'AxiosError') {
+                setError(err.message)
+                console.error(err)
+                setLoading(false)
+            }
+
         } finally {
             setLoading(false)
         }
