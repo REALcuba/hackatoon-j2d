@@ -9,7 +9,7 @@ const Thumnail = ({ characterData }: { characterData: Character[] }) => {
         <section className='bg-green-400 m-4 flex overflow-auto rounded-md box-border'>
           {characterData?.length === 0 && <p className='errorMsg'>No character data available.</p>}
           {characterData?.length > 0 && (
-              <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-h-screen gap-2 items-center box-border pt-3 mb-3'>
+                <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-h-screen gap-2 items-center box-border pt-3 mb-3'>
                   {characterData.map((character: Character) => (
                       <Card key={character.id} className='' sx={{ justifyContent: 'center', maxWidth: 180, minHeight: 225, maxHeight: 225, margin: 'auto' }}>
                           <CardMedia
@@ -18,8 +18,8 @@ const Thumnail = ({ characterData }: { characterData: Character[] }) => {
                       image={character.image}
                       alt={character.name}
                   />
-                  <CardContent sx={{ padding: 1 }}>
-                      <Typography gutterBottom component="div" sx={{ marginBottom: 0, padding: 0 }}>
+                          <CardContent sx={{ padding: 1, fontFamily: 'creepster' }}>
+                              <Typography gutterBottom component="div" sx={{ fontFamily: 'creepster', marginBottom: 0, padding: 0 }}>
                           {character.name}
                       </Typography>
                       <div className='flex gap-1'>

@@ -72,7 +72,7 @@ const GetAllCharacters = () => {
 
                                 /></Link>
                                     <CardContent sx={{ padding: 1 }}>
-                                        <Typography gutterBottom component="div" sx={{ marginBottom: 0, padding: 0 }}
+                                    <Typography gutterBottom component="div" sx={{ fontFamily: 'creepster', marginBottom: 0, padding: 0 }}
                                         >
                                             {character.name}
                                         </Typography>
@@ -107,9 +107,6 @@ const GetAllCharacters = () => {
                     </div>
                 </>}
 
-            {/* <div className='flex justify-center m-2 p-2'>
-                <button type="submit" className='bg-blue-500 rounded-sm py-1 px-2 box-border hover:bg-green-700 hover:border'>Get More Episodes</button>
-            </div> */}
         </section >
     )
 }

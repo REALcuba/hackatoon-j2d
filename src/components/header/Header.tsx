@@ -14,7 +14,7 @@ const Header: React.FC<HeaderProps> = () => {
   const { darkMode, toggleDarkMode } = useStore()
   const navigate = useNavigate()
   const handleLogoClick = () => {
-    navigate('/')
+    navigate('/hackatoon-j2d')
   }
   return (
     <header className="sticky top-0 max-w-screen">
