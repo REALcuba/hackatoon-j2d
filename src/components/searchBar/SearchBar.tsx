@@ -34,7 +34,7 @@ const SearchBar: React.FC = () => {
 
     }
 
-    const handleClickOutside = (e: React.MouseEvent) => {
+    const handleClickOutside = (e: MouseEvent) => {
         e.preventDefault()
         if (inputRef.current && e.target instanceof Node && !inputRef.current.contains(e.target)) {
             setSearchQuery('')
