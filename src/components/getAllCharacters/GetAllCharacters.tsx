@@ -1,6 +1,5 @@
 import useAxios from '../../hooks/useAxios'
 import { axiosClient } from '../../api/axiosclient'
-// import * as React from 'react';
 import { Link, useNavigate } from 'react-router-dom'
 import Card from '@mui/material/Card'
 import CardContent from '@mui/material/CardContent'
@@ -9,7 +8,6 @@ import Typography from '@mui/material/Typography'
 import { useRef } from 'react'
 import { useStore } from '../../store/useStore'
 import { Character } from 'rickmortyapi'
-// import { CardActionArea } from '@mui/material';
 const GetAllCharacters = () => {
     const [error, loading, res] = useAxios({
         axiosInstance: axiosClient,
@@ -24,7 +22,6 @@ const GetAllCharacters = () => {
 
         if (selectedCharacter) {
             const { originName } = JSON.parse(selectedCharacter)
-            // console.log('Species:', species)
             console.log('Origin Name:', originName)
         }
         navigate('/location')
@@ -36,7 +33,6 @@ const GetAllCharacters = () => {
             const { species } = JSON.parse(selectedCharacter)
             console.log('Species:', species)
 
-            // console.log('Origin Name:', originName)
         }
     }
     return (
@@ -61,10 +57,7 @@ const GetAllCharacters = () => {
                                     // handleCharacterClick(character)
                                 }}
                                 sx={{ border: 1, flexWrap: 'wrap', alignItems: 'center', maxWidth: 215, minHeight: 250, maxHeight: 225, margin: 1, display: 'flex', justifyContent: 'center' }} >
-                                    {/* <li className=''>
-                                       
-                                    </li> */}
-                                    {/* <CardActionArea> */}
+                                   
                                 <Link to={`/character/${character.id}`} ref={elementRef}>  <CardMedia sx={{ maxHeight: 150, maxWidth: '80%', margin: 1, borderRadius: '5%' }}
                                         component="img"
                                         image={character.image}
@@ -86,7 +79,6 @@ const GetAllCharacters = () => {
                                                 })}>
                                                 {character.species}
                                             </Typography>
-                                            {/* <span className='flex items-center'>|</span> */}
                                             <Typography component="span" variant="body2"
                                                 sx={{ paddingLeft: 1 }}
                                                 onClick={handleLocationClick}
@@ -98,7 +90,6 @@ const GetAllCharacters = () => {
                                             </Typography>
                                         </div>
                                     </CardContent>
-                                    {/* </CardActionArea> */}
 
                                 </Card>
 

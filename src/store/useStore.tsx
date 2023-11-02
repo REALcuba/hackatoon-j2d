@@ -48,7 +48,6 @@ export const useStore = create<StoreState>()(
                         const response = await axiosClient.get(
                             `https://rickandmortyapi.com/api/character/?name=${state.searchQuery}`
                         )
-                            console.log('API response:', response.data.results)
                         // Actualiza los resultados en el store
                             const updatedResults = response.data.results
 
@@ -57,7 +56,6 @@ export const useStore = create<StoreState>()(
                                 results: updatedResults,
                             }))
                         }
-                        console.log(state)
                     } catch (error) {
                         console.error('Error en la búsqueda de personajes:', error)
                     }

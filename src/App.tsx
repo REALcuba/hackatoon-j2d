@@ -53,7 +53,6 @@ const App: React.FC<AppProps> = () => {
   useEffect(() => {
 
   }, [selectedDetails, selectedDetailsType])
-  // console.log(selectedDetailsType)
 
   const getEpisodesListDetails = selectedDetailsType === null ? <GetAllCharacters /> : <EpisodeDetails selectedDetails={selectedDetails} />
 
@@ -68,8 +67,7 @@ const App: React.FC<AppProps> = () => {
     </> 
   )
 }
-// to do
-{/* <Thumnail characterData={result} />    */ }
+
 export default App
 
 

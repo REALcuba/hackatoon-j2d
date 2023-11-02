@@ -53,9 +53,6 @@ const PaintCharactersDetails = ({ charactersUrl }: { charactersUrl: string[] }) 
                                 // handleCharacterClick(character)
                             }}
                             sx={{ display: 'flex', flexDirection: 'column', alignItems: 'center', maxWidth: 200, Width: 180, minHeight: 240, maxHeight: 235 }}>
-                            {/*  <Link to={`/character/${character.id}`} ref={elementRef}>
-                            {character.name}
-                        </Link></li> */}
                             <Link to={`/character/${character.id}`} ref={elementRef}><CardMedia
                                 sx={{ margin: 1, maxHeight: 200, scale: 1, maxWidth: 120, borderRadius: '5%' }}
                                 className='flex items-center'

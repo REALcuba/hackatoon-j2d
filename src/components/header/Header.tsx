@@ -5,10 +5,8 @@ import sunOff from "../../assets/sun-off.svg"
 import SearchBar from "../searchBar/SearchBar"
 import { useNavigate } from "react-router-dom"
 import { useStore } from "../../store/useStore"
-// import { Dispatch, SetStateAction } from "react"
 type HeaderProps = {
-  // setSearchQuery: React.Dispatch<React.SetStateAction<string>>
-  // handleSearch: () => void
+  // toggleDarkMode: () => void
 }
 const Header: React.FC<HeaderProps> = () => {
   const { darkMode, toggleDarkMode } = useStore()

@@ -22,16 +22,10 @@ const SearchBar: React.FC = () => {
 
     }
 
-    // const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //   setInputValue(event.target.value)
-    // }
     const handleSearchIconClick = (e: React.MouseEvent) => {
-        //open search input
         e.stopPropagation()
         console.log("search")
-
         setShowISearch(!showSearch)
-
     }
 
     const handleClickOutside = (e: MouseEvent) => {
