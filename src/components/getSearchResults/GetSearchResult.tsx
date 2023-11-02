@@ -11,8 +11,8 @@ function GetSearchResult() {
     }, [search, searchQuery])
   
     return (
-        <div className='overflow-auto max-w-32 dark:text-slate-800'>
-            <ul className='overflow-auto h-32 '>
+        <div className='overflow-auto max-w-32 dark:'>
+            <ul className={`overflow-auto h-32 `}>
                 {results.map((character) => (
                     <li key={character.id} className='hover:bg-gray-400 cursor-pointer'
                         onClick={(e) => {

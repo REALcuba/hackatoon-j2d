@@ -49,7 +49,7 @@ const SearchBar: React.FC = () => {
 
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [searchQuery, setSearchQuery])
-    const resultClassName = searchQuery.length > 0 ? 'absolute z-10 my-2 p-2 bg-gray-200 h-32 rounded shadow-lg' : "hidden" 
+    const resultClassName = searchQuery.length > 0 ? 'absolute z-10 my-2 p-2 bg-slate-600  rounded shadow-lg' : "hidden" 
     return (
         <label htmlFor="searchbox">
             <div className='w-56'>
